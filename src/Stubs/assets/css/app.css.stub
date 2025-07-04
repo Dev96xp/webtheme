@@ -1,0 +1,19 @@
+/* CSS for {{themeName}} theme */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f4f8;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.theme-name {
+    font-weight: bold;
+    color: #4a7cf5;
+}

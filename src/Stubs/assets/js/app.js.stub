@@ -1,0 +1,6 @@
+// JavaScript for {{themeName}} theme
+console.log('{{themeName}} theme loaded');
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM fully loaded and parsed');
+});

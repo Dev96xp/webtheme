@@ -1,0 +1,42 @@
+{
+    "name" : "nucleusindustries/webtheme",
+    "description": "A web theme for Nucleus Industries for managing web theme.",
+    "type": "laravel-package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nucleus Industries",
+            "email": "nucleus.industries77@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require": {
+        "php": "^8.2",
+        "illuminate/console": "^11.0|^12.0",
+        "illuminate/contracts": "^11.0|^12.0",
+        "illuminate/filesystem": "^11.0|^12.0",
+        "illuminate/support": "^11.0|^12.0",
+        "illuminate/view": "^11.0|^12.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "NucleusIndustries\\Webtheme\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "NucleusIndustries\\Webtheme\\WebthemeServiceProvider"
+            ],
+            "aliases": {
+                "Theme": "NucleusIndustries\\Webtheme\\Facades\\Theme"
+            }
+
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+
+}

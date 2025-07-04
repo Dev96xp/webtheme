@@ -1,0 +1,9 @@
+@extends('webtheme::layouts.app')
+
+@section('content')
+    <div class="container">
+        <h1>Welcome to Your Application!  ZZZ </h1>
+        <p>You are currently viewing the <span class="theme-name">{{ Theme::getActiveTheme() }}</span> theme.</p>
+        <p>This is a custom welcome page generated for your theme.</p>
+    </div>
+@endsection
