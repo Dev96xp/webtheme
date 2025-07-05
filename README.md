@@ -19,7 +19,7 @@
 Requiere PHP 8.2+ y Laravel 11+.
 
 ```bash
-composer require Dev96xp/Webtheme
+composer require NucleusIndustries/Webtheme
 ````
 
 ### Publicar archivos de configuración y stubs
