@@ -53,10 +53,17 @@ class WebthemeServiceProvider extends ServiceProvider
             __DIR__ . '/Stubs' => resource_path('stubs/webtheme'),
         ], 'webtheme-stubs');
 
-        
-        $default = config('webtheme.default');        
+
+        $default = config('webtheme.default');
         $active = config('webtheme.active');
         $viewPaths = base_path(config('webtheme.paths.views'));
+
+        // --- Migrations  ---
+
+        $this->publishesMigrations([
+            __DIR__ . '/../database/migrations' => database_path('migrations'),
+        ]);
+
 
         // ----- nameSpace VISTAS ------
         // Definiendo un nameSpace para las VISTAS, que nos permitira en contrar la vista WELCOME
@@ -66,9 +73,9 @@ class WebthemeServiceProvider extends ServiceProvider
         // Este Name Space nos permitira llamar a las vistas de la siguiente manera:
         View::addNamespace('webtheme', [
             $viewPaths . '/' . $active,         // 1.Esta es la ruta que fue definida enla archivo de configuracion, si NO existe tal vista AQUI,
-                                                //   que lo busque en la la vista por default
+            //   que lo busque en la la vista por default
             $viewPaths . '/' . $default,        // 2.Esta es la ruta por defecto (default) que TAMBIEN se definio en el archivo de configuracion,
-                                                //   y por ultimo, si tampoco la encuentra AQUI, que la busque en la vista tradicional(original de laravel)
+            //   y por ultimo, si tampoco la encuentra AQUI, que la busque en la vista tradicional(original de laravel)
             resource_path('views'),             // 3.Esta es la ruta tradicional de laravel
         ]);
 
@@ -77,8 +84,9 @@ class WebthemeServiceProvider extends ServiceProvider
         // ----- nameSpace COMPONENTES ------
         // Componentes sin clases por eso son anonimos
         Blade::anonymousComponentNamespace(
-            $viewPaths . '/' . $default . '/components', 'webtheme'
-        );  
+            $viewPaths . '/' . $default . '/components',
+            'webtheme'
+        );
 
         // Registro de una clase
         // Parametro 1 - Este singleton se llamara: webtheme
@@ -88,11 +96,5 @@ class WebthemeServiceProvider extends ServiceProvider
         $this->app->singleton('webtheme', function ($app) {
             return new WebthemeManager($app['view'], $app['url']);
         });
-
-
-
-
-
-        
     }
 }
