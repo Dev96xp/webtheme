@@ -60,10 +60,12 @@ class WebthemeServiceProvider extends ServiceProvider
 
         // --- Migrations  ---
 
-        $this->publishesMigrations([
-            // __DIR__ . '/../database/migrations' => database_path('migrations'),
-            __DIR__ . '/../database/migrations' => resource_path('database/migrations'),
-        ]);
+        // $this->publishesMigrations([
+        //     // __DIR__ . '/../database/migrations' => database_path('migrations'),
+        //     __DIR__ . '/../database/migrations' => resource_path('database/migrations'),
+        // ]);
+
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
 
         // ----- nameSpace VISTAS ------
