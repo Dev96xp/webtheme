@@ -59,13 +59,15 @@ class WebthemeServiceProvider extends ServiceProvider
         $viewPaths = base_path(config('webtheme.paths.views'));
 
         // --- Migrations  ---
-
-        // $this->publishesMigrations([
-        //     // __DIR__ . '/../database/migrations' => database_path('migrations'),
-        //     __DIR__ . '/../database/migrations' => resource_path('database/migrations'),
-        // ]);
-
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        if ($this->app->runningInConsole()) {
+            // Export the migration
+            if (! class_exists('CreateBrandsTable')) {
+                $this->publishes([
+                    __DIR__ . '/../database/migrations/create_brands_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_brands_table.php'),
+                    // you can add any number of migrations here
+                ], 'migrations');
+            }
+        }
 
 
         // ----- nameSpace VISTAS ------
