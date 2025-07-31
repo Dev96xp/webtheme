@@ -58,20 +58,7 @@ class WebthemeServiceProvider extends ServiceProvider
         $active = config('webtheme.active');
         $viewPaths = base_path(config('webtheme.paths.views'));
 
-        /*
-        // --- Migrations 1 ---
-        if ($this->app->runningInConsole()) {
-            // Export the migration
-            if (! class_exists('CreateBrandsTable')) {
-                $this->publishes([
-                    __DIR__ . '/../database/migrations/create_brands_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_brands_table.php'),
-                    // you can add any number of migrations here
-                ], 'migrations');
-            }
-        }
-        */
 
-        
         // --- Migrations 2 ---
         $this->publishesMigrations([
             __DIR__ . '/../database/migrations/create_brands_table.php.stub' => database_path('migrations'),
