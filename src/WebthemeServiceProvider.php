@@ -58,7 +58,8 @@ class WebthemeServiceProvider extends ServiceProvider
         $active = config('webtheme.active');
         $viewPaths = base_path(config('webtheme.paths.views'));
 
-        // --- Migrations  ---
+        /*
+        // --- Migrations 1 ---
         if ($this->app->runningInConsole()) {
             // Export the migration
             if (! class_exists('CreateBrandsTable')) {
@@ -68,7 +69,13 @@ class WebthemeServiceProvider extends ServiceProvider
                 ], 'migrations');
             }
         }
+        */
 
+        
+        // --- Migrations 2 ---
+        $this->publishesMigrations([
+            __DIR__ . '/../database/migrations/create_brands_table.php.stub' => database_path('migrations'),
+        ]);
 
         // ----- nameSpace VISTAS ------
         // Definiendo un nameSpace para las VISTAS, que nos permitira en contrar la vista WELCOME
