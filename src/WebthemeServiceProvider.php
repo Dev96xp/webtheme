@@ -100,28 +100,20 @@ class WebthemeServiceProvider extends ServiceProvider
         });
     }
 
-    protected function publishMigrations()
+    protected function publishMigrations(array $publishables): void
     {
-        if (!$this->migrationExists('create_brands_table')) {
-            $this->publishes([
-                __DIR__ . '/database/migrations/create_brands_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_brands_table.php'),
-                // you can add any number of migrations here
-            ], 'migrations');
-            return;
+        // Generate a list of migrations that have not been published yet.
+        $migrations = [];
+        $publishables = ['CreateBrandsTable'];
+        foreach ($publishables as $publishable) {
+            // Migration already exists, continuing
+            if (class_exists($publishable)) {
+                continue;
+            }
+            $file = Str::snake($publishable) . '.php';
+            $migrations[self::MIGRATIONS_PATH . $file . '.stub'] = database_path('migrations/' . date('Y_m_d_His', time()) . "_$file");
         }
-    }
 
-
-
-    protected function migrationExists($mgr)
-    {
-        $path = database_path('migrations/');
-        $files = scandir($path);
-        $pos = false;
-        foreach ($files as &$value) {
-            $pos = strpos($value, $mgr);
-            if ($pos !== false) return true;
-        }
-        return false;
+        $this->publishes($migrations, 'migrations');
     }
 }
