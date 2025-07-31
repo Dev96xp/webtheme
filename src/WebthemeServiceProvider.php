@@ -61,7 +61,7 @@ class WebthemeServiceProvider extends ServiceProvider
 
         // --- Migrations 2 ---
         $this->publishesMigrations([
-            __DIR__ . '/../database/migrations/create_brands_table.php.stub' => database_path('migrations'),
+            __DIR__ . '/../database/migrations' => database_path('migrations'),
         ]);
 
         // ----- nameSpace VISTAS ------
