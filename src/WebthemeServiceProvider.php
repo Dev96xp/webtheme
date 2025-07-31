@@ -59,10 +59,13 @@ class WebthemeServiceProvider extends ServiceProvider
         $viewPaths = base_path(config('webtheme.paths.views'));
 
 
-        // --- Migrations 2 ---
+        $this->publishMigrations();
+
+        /* --- Migrations 2 ---
         $this->publishesMigrations([
             __DIR__ . '/../database/migrations' => database_path('migrations'),
         ]);
+        */
 
         // ----- nameSpace VISTAS ------
         // Definiendo un nameSpace para las VISTAS, que nos permitira en contrar la vista WELCOME
@@ -95,5 +98,30 @@ class WebthemeServiceProvider extends ServiceProvider
         $this->app->singleton('webtheme', function ($app) {
             return new WebthemeManager($app['view'], $app['url']);
         });
+    }
+
+    protected function publishMigrations()
+    {
+        if (!$this->migrationExists('create_brands_table')) {
+            $this->publishes([
+                __DIR__ . '/database/migrations/create_brands_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_brands_table.php'),
+                // you can add any number of migrations here
+            ], 'migrations');
+            return;
+        }
+    }
+
+
+
+    protected function migrationExists($mgr)
+    {
+        $path = database_path('migrations/');
+        $files = scandir($path);
+        $pos = false;
+        foreach ($files as &$value) {
+            $pos = strpos($value, $mgr);
+            if ($pos !== false) return true;
+        }
+        return false;
     }
 }
