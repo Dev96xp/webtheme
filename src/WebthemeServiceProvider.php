@@ -77,7 +77,7 @@ class WebthemeServiceProvider extends ServiceProvider
 
         $this->publishesMigrations([
             __DIR__ . '/../database/migrations' => database_path('migrations'),
-        ], 'your-package-migrations');
+        ]);
 
 
         // ----- nameSpace VISTAS ------
