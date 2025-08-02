@@ -39,6 +39,9 @@ class WebthemeServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
+        $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
+        
         // Load routes, views, migrations, etc. if needed
         $this->publishes([
             __DIR__ . '/../config/webtheme.php' => config_path('webtheme.php'),
@@ -60,17 +63,18 @@ class WebthemeServiceProvider extends ServiceProvider
         $viewPaths = base_path(config('webtheme.paths.views'));
 
 
+        
 
         /* --- Migrations 2 ---
         $this->publishesMigrations([
             __DIR__ . '/../database/migrations' => database_path('migrations'),
         ]);
         */
-
+/*
         $this->publishesMigrations([
             __DIR__ . '/../database/migrations' => database_path('migrations'),
         ]);
-
+*/
 
         // ----- nameSpace VISTAS ------
         // Definiendo un nameSpace para las VISTAS, que nos permitira en contrar la vista WELCOME
