@@ -133,6 +133,6 @@ class WebthemeServiceProvider extends ServiceProvider
         // Publish migrations
         $this->publishes([
             $this->migration_path => database_path('migrations'),
-        ], 'laravel-attributes-migrations');
+        ], 'laravel-migrations');
     }
 }
