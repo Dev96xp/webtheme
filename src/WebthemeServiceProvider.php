@@ -9,6 +9,13 @@ use NucleusIndustries\Webtheme\Console\Commands\MakeThemeCommand;
 
 class WebthemeServiceProvider extends ServiceProvider
 {
+
+    /**
+     * Get migration path.
+     */
+    private string $migration_path = __DIR__ . '/../migrations/';
+
+
     /**
      * Register the service provider.
      *
@@ -26,6 +33,8 @@ class WebthemeServiceProvider extends ServiceProvider
             __DIR__ . '/../config/webtheme.php',
             'webtheme'
         );
+
+        $this->publishPackageFiles();
 
         $this->commands([MakeThemeCommand::class,]);
     }
@@ -59,7 +68,6 @@ class WebthemeServiceProvider extends ServiceProvider
         $viewPaths = base_path(config('webtheme.paths.views'));
 
 
-        $this->publishMigrations();
 
         /* --- Migrations 2 ---
         $this->publishesMigrations([
@@ -115,5 +123,16 @@ class WebthemeServiceProvider extends ServiceProvider
         }
 
         $this->publishes($migrations, 'migrations');
+    }
+
+    private function publishPackageFiles()
+    {
+        // Publish config
+
+
+        // Publish migrations
+        $this->publishes([
+            $this->migration_path => database_path('migrations'),
+        ], 'laravel-attributes-migrations');
     }
 }
