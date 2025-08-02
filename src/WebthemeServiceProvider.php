@@ -75,6 +75,11 @@ class WebthemeServiceProvider extends ServiceProvider
         ]);
         */
 
+        $this->publishesMigrations([
+            __DIR__ . '/../database/migrations' => database_path('migrations'),
+        ], 'your-package-migrations');
+
+
         // ----- nameSpace VISTAS ------
         // Definiendo un nameSpace para las VISTAS, que nos permitira en contrar la vista WELCOME
         // dependiendo de su definicion en el archivo de configuracion
@@ -106,33 +111,5 @@ class WebthemeServiceProvider extends ServiceProvider
         $this->app->singleton('webtheme', function ($app) {
             return new WebthemeManager($app['view'], $app['url']);
         });
-    }
-
-    protected function publishMigrations(array $publishables): void
-    {
-        // Generate a list of migrations that have not been published yet.
-        $migrations = [];
-        $publishables = ['CreateBrandsTable'];
-        foreach ($publishables as $publishable) {
-            // Migration already exists, continuing
-            if (class_exists($publishable)) {
-                continue;
-            }
-            $file = Str::snake($publishable) . '.php';
-            $migrations[self::MIGRATIONS_PATH . $file . '.stub'] = database_path('migrations/' . date('Y_m_d_His', time()) . "_$file");
-        }
-
-        $this->publishes($migrations, 'migrations');
-    }
-
-    private function publishPackageFiles()
-    {
-        // Publish config
-
-
-        // Publish migrations
-        $this->publishes([
-            $this->migration_path => database_path('migrations'),
-        ], 'laravel-migrations');
     }
 }
