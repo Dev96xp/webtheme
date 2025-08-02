@@ -40,7 +40,7 @@ class WebthemeServiceProvider extends ServiceProvider
     public function boot(): void
     {
 
-        $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         
         // Load routes, views, migrations, etc. if needed
         $this->publishes([
