@@ -11,12 +11,6 @@ class WebthemeServiceProvider extends ServiceProvider
 {
 
     /**
-     * Get migration path.
-     */
-    private string $migration_path = __DIR__ . '/../migrations/';
-
-
-    /**
      * Register the service provider.
      *
      * @return void
@@ -33,8 +27,6 @@ class WebthemeServiceProvider extends ServiceProvider
             __DIR__ . '/../config/webtheme.php',
             'webtheme'
         );
-
-        $this->publishPackageFiles();
 
         $this->commands([MakeThemeCommand::class,]);
     }
